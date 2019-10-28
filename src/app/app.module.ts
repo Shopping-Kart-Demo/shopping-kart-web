@@ -19,7 +19,7 @@ import { JwtHelper } from 'angular2-jwt';
     AppComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     AppRoutingModule,
     MatButtonModule,

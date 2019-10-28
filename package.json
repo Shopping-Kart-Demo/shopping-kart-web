@@ -7,12 +7,17 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "node dist/server",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "npm run build-serve:ssr",
+    "compile:server": "webpack --config webpack.server.config.js --progress --colors",
+    "serve:ssr": "node dist/server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "build-serve:ssr": "npm run build:ssr && npm run serve:ssr",
+    "build:client-and-server-bundles": "ng build --prod && ng run hyper-nova-rent-car-web:server:production --bundleDependencies all"
   },
   "private": true,
   "dependencies": {
@@ -28,8 +33,11 @@
     "@angular/material": "^8.0.1",
     "@angular/platform-browser": "~8.0.1",
     "@angular/platform-browser-dynamic": "~8.0.1",
+    "@angular/platform-server": "~8.0.1",
     "@angular/router": "~8.0.1",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
+    "@nguniversal/express-engine": "^8.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "angular-local-storage": "^0.7.1",
     "angular2-jwt": "^0.2.3",
     "bootstrap": "^4.3.1",
@@ -64,7 +72,9 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
+    "ts-loader": "^5.2.0",
     "ts-node": "~7.0.0",
-    "tslint": "~5.15.0"
+    "tslint": "~5.15.0",
+    "webpack-cli": "^3.1.0"
   }
 }
