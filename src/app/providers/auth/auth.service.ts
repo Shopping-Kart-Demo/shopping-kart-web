@@ -9,10 +9,14 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AuthService {
+
+  private _logged: boolean;
+  private _sessionToken: string;
+  private tokenExpiration: any;
   
   constructor(
     private httpClient: HttpClient,
-    private cookieService: CookieService
+    private cookieService: CookieService,
   ) { }
 
 
@@ -37,11 +41,13 @@ export class AuthService {
     const token: string = this.cookieService.get('token');
     if (token) { 
 
-      headers = headers.set('authorization', 'Bearer ' + token);
+      headers = headers.set('Authorization', 'Bearer ' + token);
     }
-
+    
     return headers;
   }
+
+ 
   
 
 

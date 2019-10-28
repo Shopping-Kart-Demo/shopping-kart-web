@@ -11,6 +11,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { AuthGuard } from './guard/auth.guard';
+import { JwtHelper } from 'angular2-jwt';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { ToastrModule } from 'ngx-toastr';
   providers: [
     AuthService,
     UserService,
-    CookieService
+    CookieService,
+    AuthGuard,
+    JwtHelper
   ],
   bootstrap: [AppComponent]
 })

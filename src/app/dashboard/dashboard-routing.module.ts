@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { PurchaseComponent } from './purchase/purchase.component';
+import { AuthGuard } from '../guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,7 @@ const routes: Routes = [
     children: [
       {
         path: 'purchase',
-        component: PurchaseComponent
+        component: PurchaseComponent,
       },
       // {
       //   path: 'rent-car',
@@ -18,7 +19,9 @@ const routes: Routes = [
       // },
       {
         path: '',
-        redirectTo: 'purchase'
+        pathMatch: 'full',
+        redirectTo: 'purchase',
+
       },
       // {
       //   path: 'create-car',

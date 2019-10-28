@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {OnboardingComponent} from './onboarding.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
+import { AuthGuard } from '../guard/auth.guard';
 
 const routes: Routes = [
     {
@@ -12,11 +13,11 @@ const routes: Routes = [
         {
           path: '',
           redirectTo: 'login',
-          pathMatch: 'full'
+          pathMatch: 'full',
         },
         {
           path: 'login',
-          component: LoginComponent
+          component: LoginComponent,
         },
         {
           path: 'sign-up',
