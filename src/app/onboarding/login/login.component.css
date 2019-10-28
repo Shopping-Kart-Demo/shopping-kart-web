@@ -1,0 +1,19 @@
+.login__input {
+    width: 100%;
+}
+
+.icon_auto{
+    font-size: 120px; 
+    height: 120px;
+    width: max-content;
+    margin-top: 80px;
+    color: #000;
+}
+
+.login__button {
+    width: 100%;
+}
+
+.mensaje { 
+    color: #DE1A1A;
+}

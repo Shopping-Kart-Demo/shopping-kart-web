@@ -1,0 +1,21 @@
+.title-system {
+    font-size: 50px;
+    font-family: 'Grand Hotel', cursive;
+    color: #9E2B25;
+}
+
+.login-button {
+    width: 100%;
+    outline: none;
+}
+
+.login-button.is-active {
+    pointer-events: none;
+    border-color: #6B818C;
+    color: #6B818C;
+}
+
+.app__center-buttom {
+    height: max-content;
+    align-self: center;
+}

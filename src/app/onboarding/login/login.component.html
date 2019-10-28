@@ -1,0 +1,69 @@
+<form (submit)="false" [formGroup]="loginForm">
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4 text-center">
+            <i class=" icon_auto material-icons">laptop </i>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+
+        <div class="col-md-4">
+
+            <mat-form-field class="login__input">
+                <input matInput placeholder="Username" formControlName="username" required>
+                <mat-error *ngIf="loginForm.get('username').hasError('required')">
+                    Requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-md-center">
+
+        <div class="col-md-4">
+
+            <mat-form-field class="login__input">
+                <input matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'" formControlName="password"
+                    required>
+                <button class="icon_password" mat-icon-button matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+
+                </button>
+                <mat-error *ngIf="loginForm.get('password').invalid">
+                    {{ loginForm.get('password').hasError('required') ? 'Requerido' : loginForm.get('password').hasError('maxlength') ? 'El maximo de caracteres son 20' : 'El minimo de caracteres debe ser de 8'}}
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+
+    </div>
+
+    <div  class="row justify-content-md-center mb-3 mensaje" *ngIf="isLoginError">
+        Credenciales Incorrectas
+    </div>
+
+    <div class="row justify-content-md-center">
+
+        <div class="col-md-3">
+
+            <button type="button" class="btn btn-outline-success login__button" (click)="captchaElem.execute()">Iniciar
+                sesión</button>
+
+        </div>
+
+    </div>
+
+    <ngx-invisible-recaptcha #captchaElem 
+        [siteKey]="apiKey" 
+        [useGlobalDomain]="false" 
+        [ngModel]="recaptcha"
+        [ngModelOptions]="{ standalone: true }" 
+        (success)="handleSuccess($event)">
+    </ngx-invisible-recaptcha>
+
+</form>

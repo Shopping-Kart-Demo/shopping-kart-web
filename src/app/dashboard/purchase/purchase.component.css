@@ -1,0 +1,53 @@
+.form-boder { 
+    border: 1px solid #A6A6A8;
+    border-radius: 5px;
+    height: 200px;
+    margin-top: 25px;
+    -webkit-box-shadow: 10px 10px 5px 0px #A6A6A8;
+    -moz-box-shadow: 10px 10px 10px 0px #A6A6A8;
+    box-shadow: 10px 10px 10px 0px #A6A6A8;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+
+}
+
+.img-style { 
+    font-size: 50px;
+}
+
+.picsum-img-wrapper { 
+    height: 500px;
+}
+
+.picsum-img-wrapper img {
+    width: 100%;
+}
+
+.item-box {
+    background: white;
+    box-shadow: 0 0 15px 0.5px rgba(0, 0, 0, 0.25);
+    border-top: solid 4px green;
+}
+
+.item-purchase-img { 
+    width: 100%;
+}
+
+.item-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.item-content {
+    font-size: 12px;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.item-add-car {
+    font-size: 32px;
+}

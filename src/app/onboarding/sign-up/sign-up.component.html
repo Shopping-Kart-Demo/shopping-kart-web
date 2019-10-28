@@ -1,0 +1,160 @@
+<mat-progress-spinner class="example-margin" [mode]="'indeterminate'" *ngIf="isLoading">
+</mat-progress-spinner>
+
+<form (ngSubmit)="false" [formGroup]="signUp" *ngIf="!isLoading">
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <mat-form-field class="signInput">
+                <input matInput placeholder="Nombre" formControlName="name" required>
+                <mat-error *ngIf="signUp.get('name').hasError('required')">
+                    Requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <mat-form-field class="signInput">
+                <input matInput placeholder="Correo Electronico" formControlName="email" required>
+                <mat-error *ngIf="signUp.get('email').hasError('required')">
+                    Requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <mat-form-field class="signInput">
+                <input matInput placeholder="Número de teléfono" formControlName="phone" required>
+                <mat-error *ngIf="signUp.get('phone').hasError('required')">
+                    Requerido
+                </mat-error>
+                <mat-error *ngIf="signUp.get('phone').hasError('minlength')">
+                    El número de celular debe tener al menos 8 caracteres
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <mat-form-field class="signInput">
+                <input matInput placeholder="Nombre de Usuario" formControlName="username" required>
+                <mat-error *ngIf="signUp.get('username').hasError('required')">
+                    Requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <mat-form-field class="signInput">
+                <input matInput placeholder="Ingrese Contraseña" [type]="hide ? 'password' : 'text'"
+                    formControlName="password" required>
+                <button class="icon_password" mat-icon-button matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>
+                        {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                </button>
+                <mat-error *ngIf="signUp.get('password').invalid">
+                    {{ signUp.get('password').hasError('required') ? 'Requirido' : signUp.get('password').hasError('maxlength') ? 'El maximo de caracteres son 20' : 'El minimo de caracteres debe ser de 8'}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <mat-form-field class="signInput">
+                <input matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento" formControlName="birthDate"
+                    required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="signUp.get('birthDate').hasError('required')">
+                    Requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <mat-form-field class="signInput">
+                <mat-label>Tipo de Documento de identificación</mat-label>
+                <mat-select formControlName="idType" required>
+                    <mat-option *ngFor="let idType of idTypes" [value]="idType.id">
+                        {{idType.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="signUp.get('idType').hasError('required')">
+                    Requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <mat-form-field class="signInput">
+                <input matInput placeholder="Número del documento" formControlName="id" required>
+                <mat-error *ngIf="signUp.get('id').hasError('required')">
+                    Requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <mat-form-field class="signInput">
+                <mat-label>Sexo</mat-label>
+                <mat-select formControlName="gender" required>
+                    <mat-option *ngFor="let gender of genders" [value]="gender.id">
+                        {{gender.name}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="signUp.get('gender').hasError('required')">
+                    Requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- <div class="row justify-content-md-center">
+
+        <div class="col-md-auto justify-content-center" style="display: flex;">
+
+            <ngx-recaptcha2 #captchaElem [siteKey]="apiKey"
+                [useGlobalDomain]="false" [size]="'normal'" [hl]="'es'" [theme]="'light'" [type]="'image'"
+                formControlName="recaptcha"
+                (success)="handleSuccess($event)">
+            </ngx-recaptcha2>
+
+        </div>
+
+    </div> -->
+
+    <div class="row justify-content-md-center mt-5">
+
+        <div class="col-md-3">
+
+            <button type="button" class="btn btn-outline-success sign-up-button"
+                (click)="captchaElem.execute()">Registrarse</button>
+
+        </div>
+    </div>
+
+</form>
+
+<ngx-invisible-recaptcha #captchaElem 
+    [siteKey]="apiKey" 
+    [useGlobalDomain]="false" 
+    [ngModel]="recaptcha"
+    [ngModelOptions]="{ standalone: true }" 
+    (success)="handleSuccess($event)">
+</ngx-invisible-recaptcha>

@@ -1,0 +1,52 @@
+.dashboard__title {
+    font-size: 50px;
+    font-family: 'Grand Hotel', cursive;
+    color: #9E2B25;
+}
+
+.login-button {
+    width: 100%;
+    outline: none;
+}
+
+.login-button.is-active {
+    pointer-events: none;
+    border-color: #6B818C;
+    color: #6B818C;
+}
+
+.app__center-icon {
+    height: max-content;
+    align-self: center;
+    font-size: 30px;
+    color: #6B818C;
+}
+
+.user__Info{
+    font-size: 15px;
+    align-self: center;
+    font-family: 'Abel', sans-serif;
+    font-weight: bold;
+}
+
+.icon__cursor{
+    cursor: pointer;
+}
+
+.button-create-car {
+    outline: none;
+}
+
+.cuadro__border {
+    border: 1px solid;
+    margin-bottom: 25px;
+    height: 40px;
+    border-radius: 5px;
+    background: #090809;
+}
+
+.currency { 
+    font-size: 25px;
+    color: #95E06C;
+    font-family: 'Grand Hotel', cursive;
+}

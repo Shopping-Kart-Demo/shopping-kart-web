@@ -1,0 +1,38 @@
+
+<div class="row d-flex py-3">
+
+    <div class="col-md-6 mr-auto p-2 dashboard__title">
+        TITULO
+    </div>
+
+    <div class="p-2 app__center-icon">
+        <i class="fas fa-user"></i>
+    </div>
+
+    <div class="user__Info p-2">
+        Bienvenido {{ userInfo.username }}
+    </div>
+
+    <div class="p-2 app__center-icon">
+        <i class="fas fa-sign-out-alt icon__cursor"
+            (click)="logOut()"></i>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 cuadro__border">
+        <div>
+            <span class="currency">
+                $
+            </span>
+            <span class="currency">
+                {{ userInfo.balance }}
+            </span>
+        </div>
+        <marquee style="color: #fff">$</marquee>
+    </div>
+</div>
+
+
+<router-outlet></router-outlet>

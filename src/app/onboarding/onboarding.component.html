@@ -1,0 +1,27 @@
+<div class="row d-flex py-3">
+
+    <div class="col-md-6 mr-auto p-2 title-system">
+       Compras seguras por Intenet
+    </div>
+
+    <div class="col-md-2 p-2 app__center-buttom">
+
+        <button type="button"
+                class="btn btn-outline-primary login-button"
+                routerLink="./login"
+                [routerLinkActive]="'is-active'">Iniciar</button>
+
+    </div>
+    <div class="col-md-2 p-2 app__center-buttom">
+
+        <button type="button"
+                class="btn btn-outline-success login-button"
+                routerLink="./sign-up"
+                [routerLinkActive]="'is-active'">Registrarse</button>
+
+
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>
