@@ -1,18 +1,19 @@
 import {NgModule} from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, BrowserTransferStateModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthService} from './providers/auth/auth.service';
 import {UserService} from './providers/user/user.service';
 import {CookieService} from 'ngx-cookie-service';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuard } from './guard/auth.guard';
 import { JwtHelper } from 'angular2-jwt';
+import { TransferStateInterceptor } from './interceptors/transfer-state-interceptor';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,15 @@ import { JwtHelper } from 'angular2-jwt';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BrowserTransferStateModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TransferStateInterceptor,
+      multi: true
+    },
     AuthService,
     UserService,
     CookieService,
