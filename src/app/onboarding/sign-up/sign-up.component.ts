@@ -130,7 +130,7 @@ export class SignUpComponent extends ComponentCanDeactivate implements OnInit {
       if (response) {
         if (response.status = "success") { 
           this.defaultToastService.success('Usuario Registrado', 'Ya puede ingresar al Sistema');
-          this.router.navigate(['./']);
+          this.router.navigateByUrl('/onboarding/login');
         }
       }
 
