@@ -1,9 +1,11 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID, Optional } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { StateKey, TransferState, makeStateKey } from '@angular/platform-browser';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { tap } from 'rxjs/operators';
+import {Request} from 'express';
+import {REQUEST} from '@nguniversal/express-engine/tokens';
 
 @Injectable()
 export class TransferStateInterceptor implements HttpInterceptor {
@@ -11,18 +13,27 @@ export class TransferStateInterceptor implements HttpInterceptor {
   constructor(
     private transferState: TransferState,
     @Inject(PLATFORM_ID) private platformId: any,
+    @Optional() @Inject(REQUEST) protected request: Request
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let serverReq: HttpRequest<any> = request;
+    if (this.request) {
+      let newUrl = `${this.request.protocol}://${this.request.get('host')}`;
+      if (!request.url.startsWith('/')) {
+        newUrl += '/';
+      }
+      newUrl += request.url;
+      serverReq = request.clone({url: newUrl});
+    }
 
-    // For this demo application, we will only worry about State Transfer for get requests.
     if (request.method !== 'GET' && request.method !== 'POST') {
-      return next.handle(request);
+      return next.handle(serverReq);
     }
 
 
     // Use the request url as the key.
-    const stateKey: StateKey<string> = makeStateKey<string>(request.url);
+    const stateKey: StateKey<string> = makeStateKey<string>(`${request.method} ${request.url}`);
 
     // For any http requests made on the server, store the response in State Transfer.
     if (isPlatformServer(this.platformId)) {
@@ -45,9 +56,10 @@ export class TransferStateInterceptor implements HttpInterceptor {
         // implicit/unintentional caching mechanism).
         this.transferState.remove(stateKey);
         return of(response);
-      } else {
-        return next.handle(request);
-      }
+      } /*else {
+        console.log('paso por else', serverReq)
+        return next.handle(serverReq);
+      }*/
     }
   }
 }
