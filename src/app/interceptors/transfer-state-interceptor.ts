@@ -56,10 +56,10 @@ export class TransferStateInterceptor implements HttpInterceptor {
         // implicit/unintentional caching mechanism).
         this.transferState.remove(stateKey);
         return of(response);
-      } /*else {
+      } else {
         console.log('paso por else', serverReq)
         return next.handle(serverReq);
-      }*/
+      }
     }
   }
 }
