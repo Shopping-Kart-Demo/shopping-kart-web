@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-purchase',
@@ -41,15 +41,26 @@ export class PurchaseComponent implements OnInit {
 
 
 public carrito: Array<any> = [];
+  data: any;
+
+  public isLoading: boolean = true;
 
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+  
+    this.data = this.route.snapshot.data;
+
+    if(this.data) { 
+      this.isLoading = !this.isLoading;
+    }
   }
 
+  
 
   public agregar(producto: any): void { 
 

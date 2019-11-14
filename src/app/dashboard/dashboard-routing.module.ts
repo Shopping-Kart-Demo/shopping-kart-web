@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { AuthGuard } from '../guard/auth.guard';
+import { AppResolver } from '../providers/info-resolver.service';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
       {
         path: 'purchase',
         component: PurchaseComponent,
+        resolve: { message: AppResolver }
       },
       // {
       //   path: 'rent-car',

@@ -1,4 +1,7 @@
-<div class="container">
+<mat-progress-spinner class="example-margin" [mode]="'indeterminate'" *ngIf="isLoading">
+</mat-progress-spinner>
+
+<div class="container" *ngIf="!isLoading">
 
     <div class="row">
         <div class="col-md-12">

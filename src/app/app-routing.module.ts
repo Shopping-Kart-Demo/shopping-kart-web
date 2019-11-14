@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
+import { AppResolver } from './providers/info-resolver.service';
 
 const appRoutes: Routes = [
 
@@ -11,7 +12,7 @@ const appRoutes: Routes = [
     {
       path: 'dashboard',
       loadChildren: './dashboard/dashboard.module#DashboardModule',
-      canLoad: [AuthGuard]
+      canLoad: [AuthGuard],
     },
     {
       path: '',
@@ -31,6 +32,9 @@ const appRoutes: Routes = [
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    AppResolver
   ]
 })
 export class AppRoutingModule { }

@@ -5,7 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { PurchaseComponent } from './purchase/purchase.component';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 import { NgxCaptchaModule } from 'ngx-captcha';
 
 
@@ -19,7 +19,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     DashboardRoutingModule,
     NgbCarouselModule,
     MatIconModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    MatProgressSpinnerModule
   ]
 })
 export class DashboardModule { }
